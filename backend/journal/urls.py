@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
+from .views import JournalEntryListCreate
 
 urlpatterns = [
-    path('', views.hello, name='hello'),
+    path('entries/', JournalEntryListCreate.as_view(), name='journal-entry-list-create'),
 ]
