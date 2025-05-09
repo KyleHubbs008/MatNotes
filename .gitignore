@@ -1,6 +1,6 @@
 backend/venv/
 backend/__pycache__/
 backend/*.pyc
-node_modules/
-dist/
+frontend/matnotes-app/node_modules/
+frontend/matnotes-app/dist/
 .env
