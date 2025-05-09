@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Journal Entries for {{ selectedDate }}</h2>
+  <div *ngIf="entries.length === 0" class="no-entries">No entries found</div>
+  <ul>
+    <li *ngFor="let entry of entries">
+      {{ entry.content }} (Created: {{ entry.created_at | date:'medium' }})
+    </li>
+  </ul>
+
+  <form (ngSubmit)="onSubmit()" #entryForm="ngForm">
+    <div>
+      <label for="date">Date:</label>
+      <input type="date" id="date" [(ngModel)]="selectedDate" name="date" required>
+    </div>
+    <div>
+      <label for="content">Content:</label>
+      <textarea id="content" [(ngModel)]="newEntry.content" name="content" required></textarea>
+    </div>
+    <button type="submit" [disabled]="!entryForm.valid">Add Entry</button>
+  </form>
+</div>
