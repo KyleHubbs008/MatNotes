@@ -1,0 +1,6 @@
+<h2>MatNotes</h2>
+<input type="text" [(ngModel)]="newNote" placeholder="Add a note" />
+<button (click)="addNote()">Add Note</button>
+<ul>
+  <li *ngFor="let note of notes">{{ note }}</li>
+</ul>
