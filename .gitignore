@@ -1,0 +1,8 @@
+node_modules/
+*.log
+bin/
+obj/
+*.db
+*.sqlite
+venv/
+.env
