@@ -1,6 +1,10 @@
 <h2>MatNotes</h2>
-<input type="text" [(ngModel)]="newNote" placeholder="Add a note" />
-<button (click)="addNote()">Add Note</button>
+<div>
+  <input type="text" [(ngModel)]="newNote" placeholder="Enter a note" />
+  <button (click)="addNote()">Add Note</button>
+</div>
 <ul>
-  <li *ngFor="let note of notes">{{ note }}</li>
+  <li *ngFor="let note of notes">
+    {{ note.content }} (Added: {{ note.createdAt | date : "short" }})
+  </li>
 </ul>
