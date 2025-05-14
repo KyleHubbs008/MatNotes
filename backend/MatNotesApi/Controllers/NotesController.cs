@@ -24,10 +24,21 @@ namespace MatNotesApi.Controllers
         [HttpPost]
         public IActionResult AddNote([FromBody] string content)
         {
-            var note = new Note { Content = content };
+            if (string.IsNullOrEmpty(content))
+            {
+                return BadRequest("Content is required.");
+            }
+
+            var note = new Note
+            {
+                Content = content,
+                CreatedAt = DateTime.UtcNow
+            };
+
             _context.Notes.Add(note);
             _context.SaveChanges();
-            return Ok(new { message = "Note added", note });
+
+            return Ok(new { message = "Note added", note});
         }
 	}
 }
