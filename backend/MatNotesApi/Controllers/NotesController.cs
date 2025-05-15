@@ -4,11 +4,11 @@ using MatNotesApi.Models;
 
 namespace MatNotesApi.Controllers
 {
-	[ApiController]
-	[Route("api/[controller]")]
-	public class NotesController : ControllerBase
-	{
-		private readonly NotesContext _context;
+    [ApiController]
+    [Route("api/[controller]")]
+    public class NotesController : ControllerBase
+    {
+        private readonly NotesContext _context;
 
         public NotesController(NotesContext context)
         {
@@ -38,7 +38,42 @@ namespace MatNotesApi.Controllers
             _context.Notes.Add(note);
             _context.SaveChanges();
 
-            return Ok(new { message = "Note added", note});
+            return Ok(new { message = "Note added", note });
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateNote(int id, [FromBody] string content)
+        {
+            var note = _context.Notes.Find(id);
+            if (note == null)
+            {
+                return NotFound(new { message = "Note not found." });
+            }
+
+            if (string.IsNullOrEmpty(content))
+            {
+                return BadRequest(new { message = "Content is required." });
+            }
+
+            note.Content = content;
+            _context.SaveChanges();
+
+            return Ok(new { message = "Note updated.", note });
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteNote(int id)
+        {
+            var note = _context.Notes.Find(id);
+            if (note == null)
+            {
+                return NotFound(new { message = "Note not found." });
+            }
+
+            _context.Notes.Remove(note);
+            _context.SaveChanges();
+
+            return Ok(new { message = "Note deleted." });
         }
 	}
 }
