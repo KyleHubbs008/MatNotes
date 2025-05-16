@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Note } from '../note.interface'; // Import the interface
@@ -7,7 +7,7 @@ import { Note } from '../note.interface'; // Import the interface
 @Component({
   selector: 'app-notes',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.css'],
 })
@@ -34,23 +34,47 @@ export class NotesComponent implements OnInit {
 
   addNote(): void {
     if (this.newNote.trim()) {
-      this.http
-        .post(
-          'https://localhost:5001/api/notes',
-          JSON.stringify(this.newNote),
-          {
-            headers: { 'Content-Type': 'application/json' },
-          }
-        )
-        .subscribe({
-          next: () => {
-            this.loadNotes();
-            this.newNote = '';
-          },
-          error: (err) => {
-            console.error('Error adding note:', err);
-          },
-        });
+      this.http.post('https://localhost:5001/api/notes', JSON.stringify(this.newNote),
+        {
+          headers: { 'Content-Type': 'application/json' },
+      }).subscribe({
+        next: () => {
+          this.loadNotes();
+          this.newNote = '';
+        },
+        error: (err) => {
+          console.error('Error adding note:', err);
+        },
+      });
+    }
+  }
+
+  editNote(note: Note): void {
+    const updatedContent = prompt('Edit note:', note.content);
+    if (updatedContent && updatedContent.trim()) {
+      this.http.put(`https://localhost:5001/api/notes/${note.id}`, JSON.stringify(updatedContent), {
+        headers: { 'Content-Type': 'application/json' }
+      }).subscribe({
+        next: () => {
+          this.loadNotes();
+        },
+        error: (err) => {
+          console.error('Error updating note:', err);
+        }
+      });
+    }
+  }
+
+  deleteNode(id: number): void {
+    if (confirm('Are you sure you want to delete this note?')) {
+      this.http.delete(`https://localhost:5001/api/notes/${id}`).subscribe({
+        next: () => {
+          this.loadNotes();
+        },
+        error: (err) => {
+          console.error('Error deleting note:', err);
+        }
+      });
     }
   }
 }

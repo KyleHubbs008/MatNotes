@@ -1,10 +1,14 @@
-<h2>MatNotes</h2>
-<div>
-  <input type="text" [(ngModel)]="newNote" placeholder="Enter a note" />
-  <button (click)="addNote()">Add Note</button>
+<div class="notes-container">
+  <h1>MatNotes</h1>
+  <div class="input-area">
+    <input type="text" [(ngModel)]="newNote" placeholder="Enter a note" />
+    <button (click)="addNote()">Add Note</button>
+  </div>
+  <ul>
+    <li *ngFor="let note of notes">
+      <span class="note-content">{{ note.content }} (Added: {{ note.createdAt | date:'short' }})</span>
+      <button class="edit" (click)="editNote(note)">Edit</button>
+      <button class="delete" (click)="deleteNode(note.id)">Delete</button>
+    </li>
+  </ul>
 </div>
-<ul>
-  <li *ngFor="let note of notes">
-    {{ note.content }} (Added: {{ note.createdAt | date : "short" }})
-  </li>
-</ul>
