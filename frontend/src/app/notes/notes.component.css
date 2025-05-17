@@ -1,33 +1,30 @@
-/* Overall container styling with 8-bit dojo background */
+/* Overall container styling with Game Boy aesthetic */
 .notes-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   font-family: "Press Start 2P", cursive; /* 8-bit pixel font */
-  background: url("https://via.placeholder.com/800x1200/1a2b3c/ffffff?text=Dojo+Floor")
-    repeat;
-  background-color: #1a2b3c; /* Dark blue base */
+  background-color: #d7d7a7; /* Light yellowish-gray (Game Boy screen) */
   min-height: 100vh;
-  color: #fff; /* White text for contrast */
-  border: 4px solid #ffcc00; /* Gold border for retro feel */
-  box-shadow: 0 0 10px #ffcc00; /* Glow effect */
+  color: #3c3c2a; /* Darker shade for text */
+  border: 4px solid #a7a77d; /* Medium gray border */
+  box-shadow: 0 0 8px #a7a77d; /* Subtle glow */
 }
 
-/* Header styling with martial arts title */
+/* Header styling with Game Boy dialog box look */
 h1 {
   text-align: center;
-  color: #ffcc00; /* Gold for 8-bit title */
-  font-size: 2em;
+  color: #3c3c2a; /* Dark shade for contrast */
+  font-size: 1.5em; /* Smaller for Game Boy feel */
   margin-bottom: 20px;
   padding: 10px;
-  background: url("https://via.placeholder.com/200x50/4a2c1a/ffffff?text=Scroll")
-    no-repeat center;
-  background-size: contain;
-  text-shadow: 2px 2px #000; /* 8-bit shadow */
-  border: 2px dashed #ffcc00;
+  background-color: #a7a77d; /* Medium gray background */
+  border: 3px solid #7d7d55; /* Slightly darker border */
+  border-radius: 0; /* Square edges */
+  box-shadow: 2px 2px #3c3c2a; /* Pixelated shadow */
 }
 
-/* Input area styling with pixelated button */
+/* Input area styling with pixelated input */
 .input-area {
   display: flex;
   justify-content: center;
@@ -39,16 +36,16 @@ input[type="text"] {
   padding: 8px;
   font-size: 1em;
   font-family: "Press Start 2P", cursive;
-  border: 3px solid #ff6600; /* Orange border */
+  border: 3px solid #7d7d55; /* Medium-dark border */
   border-radius: 0; /* Square edges for 8-bit */
   width: 300px;
-  background: #2a3c4d; /* Darker blue input */
-  color: #fff;
-  box-shadow: inset 2px 2px #000; /* 8-bit inset */
+  background: #d7d7a7; /* Light yellowish-gray */
+  color: #3c3c2a; /* Dark shade for text */
+  box-shadow: inset 2px 2px #3c3c2a; /* 8-bit inset */
 }
 
 input[type="text"]:focus {
-  border-color: #ffcc00; /* Gold on focus */
+  border-color: #3c3c2a; /* Darkest shade on focus */
   outline: none;
 }
 
@@ -56,17 +53,17 @@ button {
   padding: 8px 15px;
   font-size: 1em;
   font-family: "Press Start 2P", cursive;
-  border: 3px solid #ff6600;
-  border-radius: 8px; /* Rounded corners */
+  border: 3px solid #7d7d55; /* Medium-dark border */
+  border-radius: 8px; /* Rounded corners as requested */
   cursor: pointer;
-  background: #ff6600; /* Orange button */
-  color: #fff;
-  text-shadow: 1px 1px #000;
+  background: #a7a77d; /* Medium gray button */
+  color: #3c3c2a; /* Dark shade for text */
+  text-shadow: 1px 1px #3c3c2a; /* Subtle shadow */
   transition: background-color 0.2s;
 }
 
 .input-area button:hover {
-  background-color: #cc5500; /* Darker orange on hover */
+  background-color: #7d7d55; /* Slightly darker on hover */
 }
 
 /* Note list styling with pixelated cards */
@@ -76,23 +73,21 @@ ul {
 }
 
 li {
-  background: #2a3c4d; /* Dark blue card */
+  background: #d7d7a7; /* Light yellowish-gray card */
   padding: 12px;
   margin-bottom: 15px;
-  border: 3px solid #ffcc00; /* Gold border */
+  border: 3px solid #7d7d55; /* Medium-dark border */
   border-radius: 0;
-  box-shadow: 2px 2px #000; /* 8-bit shadow */
+  box-shadow: 2px 2px #3c3c2a; /* 8-bit shadow */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-image: url("https://via.placeholder.com/300x100/2a3c4d/ffffff?text=Pixel+Grid");
-  background-size: 20px 20px;
 }
 
 li .note-content {
   flex-grow: 1;
   margin-right: 10px;
-  color: #fff;
+  color: #3c3c2a; /* Dark shade for text */
 }
 
 li button {
@@ -102,19 +97,19 @@ li button {
 }
 
 li button.edit {
-  background-color: #00cc00; /* Green for edit */
-  border-color: #00cc00;
+  background-color: #a7a77d; /* Medium gray for edit */
+  border-color: #7d7d55;
 }
 
 li button.edit:hover {
-  background-color: #009900; /* Darker green */
+  background-color: #7d7d55; /* Slightly darker */
 }
 
 li button.delete {
-  background-color: #cc0000; /* Red for delete */
-  border-color: #cc0000;
+  background-color: #a7a77d; /* Medium gray for delete */
+  border-color: #7d7d55;
 }
 
 li button.delete:hover {
-  background-color: #990000; /* Darker red */
+  background-color: #7d7d55; /* Slightly darker */
 }
