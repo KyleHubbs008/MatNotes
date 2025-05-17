@@ -5,8 +5,10 @@
     <button (click)="addNote()">Add Note</button>
   </div>
   <ul>
-    <li *ngFor="let note of notes">
-      <span class="note-content">{{ note.content }} (Added: {{ note.createdAt | date:'short' }})</span>
+    <li *ngFor="let note of notes" [@fadeIn]>
+      <span class="note-content"
+        >{{ note.content }} (Added: {{ note.createdAt | date : "short" }})</span
+      >
       <button class="edit" (click)="editNote(note)">Edit</button>
       <button class="delete" (click)="deleteNode(note.id)">Delete</button>
     </li>

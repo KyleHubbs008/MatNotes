@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Note } from '../note.interface'; // Import the interface
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-notes',
@@ -10,6 +11,17 @@ import { Note } from '../note.interface'; // Import the interface
   imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.css'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(10px)' }),
+        animate(
+          '400ms ease-out',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class NotesComponent implements OnInit {
   notes: Note[] = [];
@@ -34,34 +46,45 @@ export class NotesComponent implements OnInit {
 
   addNote(): void {
     if (this.newNote.trim()) {
-      this.http.post('https://localhost:5001/api/notes', JSON.stringify(this.newNote),
-        {
-          headers: { 'Content-Type': 'application/json' },
-      }).subscribe({
-        next: () => {
-          this.loadNotes();
-          this.newNote = '';
-        },
-        error: (err) => {
-          console.error('Error adding note:', err);
-        },
-      });
+      this.http
+        .post(
+          'https://localhost:5001/api/notes',
+          JSON.stringify(this.newNote),
+          {
+            headers: { 'Content-Type': 'application/json' },
+          }
+        )
+        .subscribe({
+          next: () => {
+            this.loadNotes();
+            this.newNote = '';
+          },
+          error: (err) => {
+            console.error('Error adding note:', err);
+          },
+        });
     }
   }
 
   editNote(note: Note): void {
     const updatedContent = prompt('Edit note:', note.content);
     if (updatedContent && updatedContent.trim()) {
-      this.http.put(`https://localhost:5001/api/notes/${note.id}`, JSON.stringify(updatedContent), {
-        headers: { 'Content-Type': 'application/json' }
-      }).subscribe({
-        next: () => {
-          this.loadNotes();
-        },
-        error: (err) => {
-          console.error('Error updating note:', err);
-        }
-      });
+      this.http
+        .put(
+          `https://localhost:5001/api/notes/${note.id}`,
+          JSON.stringify(updatedContent),
+          {
+            headers: { 'Content-Type': 'application/json' },
+          }
+        )
+        .subscribe({
+          next: () => {
+            this.loadNotes();
+          },
+          error: (err) => {
+            console.error('Error updating note:', err);
+          },
+        });
     }
   }
 
@@ -73,7 +96,7 @@ export class NotesComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error deleting note:', err);
-        }
+        },
       });
     }
   }
